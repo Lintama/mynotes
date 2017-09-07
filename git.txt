@@ -1,0 +1,106 @@
+mkdir learngit 创建仓库 (版本库)
+cd learngit 移动
+pwd 当前目录
+
+git init 变成可用的仓库  新增隐藏的.git文件夹
+
+git add 添加到暂存区
+git commit 提交至版本库
+
+git status 查看修改和暂存区的状态
+git diff  查看具体修改
+git diff HEAD -- readme.txt
+
+git log 查看提交历史
+git log --pretty=oneline
+git reset --hard head^ 回到上一个版本
+git reset --hard commit-id 回到指定版本
+git reflog 查看命令历史
+
+
+git checkout --readme.txt 已经放入暂存区后修改  回到添加到暂存区的状态
+                          未放入暂存区的修改 回到版本库的最新状态
+git reset head readme.txt 暂存区回到工作区
+
+
+rm test.txt 在工作区删除
+git rm test.txt 将删除状态提交到暂存区
+git reset head test.txt 从暂存区回到工作区 此时和rm test.txt一样处于unstage状态
+git commit 
+
+
+ssh-keygen -t rsa -C"email" 创建SSH Key
+git remote add origin git@github.com:Lintama/learngit.git
+git remote add origin git@server-name:path/repo-name.git 关联一个远程仓库
+git push -u origin master 第一次推送master分支的所有内容
+之后每次提交使用 git push origin master即可
+
+
+git clone git@githun.com:Lintama/learngit2.git
+cd learngit2
+ls 读取当前目录有哪些文件
+
+
+
+git branch 查看分支
+git branch name 创建分支
+git checkout name 切换分支
+git checkout -b name 创建+切换分支
+git merge name 合并某分支到当前分支
+git branch -d name 删除分支
+
+
+当master和其他分支都有更新 无法快速合并 只能试图把各自的修改合并起来
+若发生冲突 需手动解决
+git log --graph --pretty=oneline --abbrev-commit
+git log --graph
+
+合并分支的时 尽可能回用Fast forward模式 此模式下删除分支会丢失分支记录
+git log --graph中只能看到一条主分支
+若不用fast forward 就能看到分支记录
+git merge --no-ff -m"merge with no-ff" dev 因为no-ff模式合并会新产生一个commit 因此得带上-m信息
+何为新产生一个commit？ 
+                       master
+ff模式： ----*----*-----*        master指向dev 然后删除dev即可
+                       dev
+                           master
+no-ff模式：-----*----*---------*     新产生了一个commit 
+                     \--*----/
+                       dev
+
+
+bug分支：
+git stash 先保存当前工作区
+checkout 移动到bug分支
+git checkout -b issue-101 创建修复bug的分支
+git checkout master  
+git merge --no-ff -m"issue-101 fixed" issue-101
+git branch -d issue-101 修复bug
+git stash list 寻找保存的工作区
+git stash apply (stash@{0})恢复后 list内容不被删除 只能用git stash drop一个个删除
+git stash pop 恢复后list中内容被删除
+
+
+Feature分支：
+开发新功能最好新建一个分支
+没有被merge过的分支删除时会失败
+可用git branch -D name 强制删除
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

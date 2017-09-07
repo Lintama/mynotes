@@ -1,0 +1,102 @@
+第七章 C控制语句：分支和跳转
+
+getchar() == scanf("%c",&ch)
+putchar() == printf("%c",ch)
+
+
+ch = getchar()
+while(ch != '\n'){
+    ...
+    ch = getchar()
+}
+可替换成
+while((ch=getchar()) != '\n'){     表达式的值   C语言特有的编程风格：把两个行为合并为一个表达式
+    ...
+}
+
+
+putchar(ch+1)再次体现了字符实际上是作为整数存储的   只根据最后一个字符确定显示哪个字符
+
+#include <ctype.h> 一系列字符函数
+
+
+
+if else语句被视作一条语句 可以不加大括号 也可加大括号提高可读性
+
+
+if和else的匹配
+如果没有大括号 else和最近的一个if匹配
+
+
+
+
+if( isPrime )   isPrime是一个flag
+
+
+
+逻辑运算符
+&& || ! 与 或 非
+#include<iso646.h> 可用 and or not 代替
+
+
+
+！！！！
+求值顺序
+apples = (5+3)*(6+9)可能先对5+3求值 也有可能先对6+9求值
+而逻辑表达式的求值顺序是从左往右 
+&&和||都是序列点 在一个运算对象执行到下一个运算对象之前 所有的副作用都会生效
+正是由于这样才能有这样的代码：
+while ((c=getchar()) != '' && c!='\n') 先赋值 再判断
+if(num != 0 && 12/num == 2) 如果第一个表达式为假 不再对后一个表达式求值 (只有当num不为0时才让num作为分母)
+while( x++ < 10 && x+y < 20 ) &&和||为序列点 所以保证在&&前++已经生效 即使&&后面也有x++
+
+简述：逻辑表达式的求值顺序是从左往右 一旦发现有使整个表达式为假的因素 立即停止求值
+
+
+
+表达范围 应用&&  如     range>=90 && range<=100
+
+90<=range<=100 语法没错 语义错误  (90<=range)<=100
+
+
+
+while((ch=getchar())!=STOP)
+
+条件运算符 ?:
+C中唯一一个三元运算符
+e1?e2:e3
+若e1为真 整个条件表达式的值与e2相同 反之与e3的值相同
+max =(a>b)?a:b ;
+cans == 1?"can":"cans"
+
+
+
+continue break 用与不用取决于是否能简化代码
+
+switch语句  若根据浮点类型或者表达式来选择 就无法使用switch
+switch(num){
+   case 1: ... ;  break;
+   case 2; ... ;  break;
+   default : ...;  
+}
+
+根据num进入case 依次执行之后所有语句   break作用：跳转到switch后一条语句 
+若无default 而输入的值没有对应的标签 直接跳到switch后一条语句
+
+多重标签
+switch(ch){
+   case 'e':
+   case 'E': ... ;  break;
+   
+   case 'f'
+   case 'F': ... ;  break;
+   
+   default : ...;  
+}
+
+goto语句
+最好别用  一种可以接受的用法是 出现问题中从一组嵌套循环中跳出（break只能跳出当前循环）
+goto help;
+help: 语句   help:后的语句有无goto都正常执行
+
+
