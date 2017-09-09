@@ -79,6 +79,41 @@ v = *p;合在一起 相当于
 v = b;
 
 声明指针
+声明指针变量时必须指定指针所指向的变量类型
+int * pi;
+char * pc;
+float *p, *s;
+
+int  * pfeet; *表明声明的变量为一个指针 
+pfeet = &feet pfeet为指针变量 它的值是一个地址
+*pfeet 为该地址上存储的值
+
+void xxx(int *,int *)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
