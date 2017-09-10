@@ -86,8 +86,40 @@ int * p;
 int sum(const int ar[]);可保护数组中的数据
 
 
+int c[4]={1,2,3,4}
+int * p = c;
+p[1] = c[1] = 2
+若 p = c+1
+p[1] = 3 
+c[1] = 2
+进一步说明了数组的实质是在变相使用指针
+只不过分为数组表示法和指针表示法
+
+const int * p = c;
+不能通过p[1]=xxx改变数组的元素
+指向const的指针通常用于函数形参 表明该函数不会使用指针改变数据
+void arr(const double *ar,int n);
+不能把const数据的地址赋给普通指针（否则通过指针就能改变const的值）
+(但是只给个warning 实际上可以改)
+因此 对函数的形参使用const不仅能保护数据 还能让函数处理const数组
 
 
+
+还可以声明一个不能指向别处的指针
+int * const p = rates;
+也可 
+const int * const p = rates;
+使p指针既不能改变所指向的值 又不能指向别的地址
+
+
+
+
+
+
+
+
+
+ 
 
 
 
